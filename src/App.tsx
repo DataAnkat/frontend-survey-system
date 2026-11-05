@@ -1,12 +1,19 @@
+import { AppBar, Container, CssBaseline, Toolbar, Typography } from '@mui/material'
 import './App.css'
-import Survey from './components/Survey'
+import SurveyList from './components/SurveyList'
 
 function App() {
 
   return (
-    <>
-      <Survey />
-    </>
+    <Container>
+      <AppBar>
+        <Toolbar>
+          <Typography variant='h6'>Survey List</Typography>
+        </Toolbar>
+      </AppBar>
+      <SurveyList/>
+      <CssBaseline/>
+    </Container>
   )
 }
 
