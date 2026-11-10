@@ -3,8 +3,8 @@ import type { SurveyData } from "../types";
 
 
 function Survey() {
-  const [survey, setSurveys] = useState<SurveyData[] | null>();
-  const id=1;
+  const [survey, setSurveys] = useState<SurveyData| null>();
+  const id=survey?.id;
       useEffect(() => {
         fetch(`http://localhost:8080/api/surveys/${id}`)
             .then(response => {
@@ -33,7 +33,7 @@ function Survey() {
   return (
     <>
   <div>
-    <h1>{survey.name}</h1>
+    <h1>{survey?.name}</h1>
   </div>
 
   <button onClick={handleDelete}>
