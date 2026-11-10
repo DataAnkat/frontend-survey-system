@@ -18,9 +18,7 @@ function SurveyList () {
     const columns: GridColDef[] = [
         {field: 'name', headerName: 'Name', flex: 1, 
             renderCell: () => 
-            <Link href='http://localhost:8080/survey/1'>
-                This is a link that you click
-            </Link>
+            <Button>Click this button</Button>
         },
 
     ]
@@ -54,6 +52,10 @@ function SurveyList () {
             rows={survey || []}
             columns={columns}
             autoPageSize
+            //getRowId={row => row.name}
+            onRowClick={() => {
+                console.log(survey);
+            }}
             />
         </div>
         <Snackbar
