@@ -33,7 +33,7 @@ function Survey() {
 
   return (
     <>
-      <button onClick={() => navigate("/")}>Takaisin</button>
+
       <div>
         <h1>{survey?.name}</h1>
         <p>{survey?.description}</p>
@@ -42,7 +42,11 @@ function Survey() {
         </ol>
       </div>
 
+     
+      <button onClick={() => navigate("/")}>Takaisin</button>
+      <> </>
       <button onClick={() => navigate("/editSurvey")}> Edit </button>
+      
     
 
     </>
