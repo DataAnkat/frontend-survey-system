@@ -16,18 +16,20 @@ function Survey() {
       .catch(error => console.error(error));
   }, [id]);
 
-  const handleDelete = () => {
-    fetch(`${import.meta.env.VITE_API_URL}/${id}`, {
-      method: 'DELETE'
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Poisto epäonnistui");
-        }
-        navigate("/");
-      })
-      .catch(error => console.error(error));
-  }
+  // const handleDelete = () => {
+  //   fetch(`${import.meta.env.VITE_API_URL}/${id}`, {
+  //     method: 'DELETE'
+  //   })
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error("Poisto epäonnistui");
+  //       }
+  //       navigate("/");
+  //     })
+  //     .catch(error => console.error(error));
+  // }
+
+
 
   return (
     <>
@@ -40,9 +42,9 @@ function Survey() {
         </ol>
       </div>
 
-      <button onClick={handleDelete}>
-        Poisto
-      </button>
+      <button onClick={() => navigate("/editSurvey")}> Edit </button>
+    
+
     </>
   )
 }
