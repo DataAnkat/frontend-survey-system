@@ -17,10 +17,11 @@ function SurveyList () {
     // tavallaan toimii mutta ei anna survey list
 
     const columns: GridColDef[] = [
-        {field: 'name', headerName: 'Name', flex: 1, 
+        {
+            field: 'name', headerName: 'Name', flex: 1, 
             renderCell: (params) =>
-            <Button onClick={() => navigate(`/surveys/${params.row.id}`)}>{params.row.name}</Button>
-        },
+            <Button onClick={() => navigate(`/surveys/${params.row.id}`)}>{'Kysely: ' + params.row.name}</Button>
+        }
 
     ]
 
