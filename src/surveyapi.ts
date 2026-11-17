@@ -1,5 +1,5 @@
 export function getSurveys() {
-    return fetch(import.meta.env.VITE_API_URL) 
+    return fetch(import.meta.env.VITE_API_URL + '/api/surveys') 
         .then(response => {
             if (!response.ok) {
                 throw new Error("Error when fetching surveys");
@@ -10,7 +10,7 @@ export function getSurveys() {
 }
 
 export function getSurveyById(id: number | string) {
-    return fetch(`${import.meta.env.VITE_API_URL}/${id}`)
+    return fetch(`${import.meta.env.VITE_API_URL}/api/survey/${id}`)
         .then(response => {
             if (!response.ok) throw new Error("Error when fetching survey");
             return response.json();
