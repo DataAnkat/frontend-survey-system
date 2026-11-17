@@ -16,21 +16,6 @@ function Survey() {
       .catch(error => console.error(error));
   }, [id]);
 
-  // const handleDelete = () => {
-  //   fetch(`${import.meta.env.VITE_API_URL}/${id}`, {
-  //     method: 'DELETE'
-  //   })
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error("Poisto epäonnistui");
-  //       }
-  //       navigate("/");
-  //     })
-  //     .catch(error => console.error(error));
-  // }
-
-
-
   return (
     <>
 
@@ -45,7 +30,6 @@ function Survey() {
      
       <button onClick={() => navigate("/")}>Takaisin</button>
       <> </>
-      <button onClick={() => navigate("/editSurvey")}> Edit </button>
       
     
 

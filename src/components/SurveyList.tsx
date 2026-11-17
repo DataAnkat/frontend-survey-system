@@ -14,8 +14,6 @@ function SurveyList () {
     const navigate = useNavigate();
 
 
-    // tavallaan toimii mutta ei anna survey list
-
     const columns: GridColDef[] = [
         {
             field: 'name', headerName: 'Name', flex: 1, 
@@ -35,17 +33,6 @@ function SurveyList () {
         fetchSurveys();
     }, [])
 
-    // const handleDelete = (url: string) => {
-    //     if (window.confirm("Are you sure?")) {
-    //         deleteCar(url)
-    //         .then(() => {
-    //             fetchCars()
-    //             setOpen(true)
-    //         })
-    //         .catch(err => console.error(err))
-    //     }
-        
-    // }
 
     return (
         <>
