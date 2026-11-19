@@ -26,7 +26,7 @@ p {
     min-width: 200px;
     min-height: 80px;
     resize: both;
-    overflow: auto;
+    overflow: hidden;
 
 }
 
@@ -42,8 +42,12 @@ p {
     /* make resizable */
     resize: none;
     box-sizing: border-box;
+    width: 100% !important;
     height: 100% !important;
-    
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 
