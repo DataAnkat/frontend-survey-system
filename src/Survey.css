@@ -1,0 +1,65 @@
+h1 {
+    margin-top: 80px;
+    color: black;
+    /* text-align: left; */
+}
+
+p {
+    text-align: left;
+}
+
+.Survey{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* position: fixed; */
+    padding-left: 20px;
+    margin-left: 0;
+    text-align: left;
+    
+}
+
+.vastauslaatikko {
+    display: inline-block;
+    width: 300px;
+    height: 120px;
+    min-width: 200px;
+    min-height: 80px;
+    resize: both;
+    overflow: auto;
+
+}
+
+.vastauslaatikko .MuiOutlinedInput-root {
+    width: 100%;
+    height: 100%;
+    min-width: 200px;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+
+.vastauslaatikko .MuiInputBase-inputMultiline{
+    /* make resizable */
+    resize: none;
+    box-sizing: border-box;
+    height: 100% !important;
+    
+}
+
+
+
+/* .vastauslaatikko > input {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.vastauslaatikko > span {
+    display: inline-block;
+    vertical-align: bottom;
+    margin-left: -16px;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAJUlEQVR4AcXJRwEAIBAAIPuXxgiOW3xZYzi1Q3Nqh+bUDk1yD9sQaUG/4ehuEAAAAABJRU5ErkJggg==");
+    cursor: ew-resize;
+} */

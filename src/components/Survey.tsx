@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import type { SurveyData } from "../types";
 import { getSurveyById } from "../surveyapi";
+import { TextField } from "@mui/material";
+import '../Survey.css';
 
 
 function Survey() {
@@ -22,16 +24,24 @@ function Survey() {
       <div>
         <h1>{survey?.name}</h1>
         <p>{survey?.description}</p>
-        <ol>
-          {survey?.questions?.map((q, i) => <li key={i}>{q}</li>)}
+        <ol className="Survey">
+          {survey?.questions?.map((q, i) => <li key={i}>{q}<br />
+            <TextField
+              multiline
+              id="outlined-multiline-flexible"
+              className="vastauslaatikko" /></li>)}
         </ol>
       </div>
 
-     
-      <button onClick={() => navigate("/")}>Takaisin</button>
+      <div>
+        <button onClick={() => navigate("/")}>Takaisin</button>
+
+        <button onClick={() => SubmitEvent}>Tallenna</button>
+      </div>
+      {/* Ei toimi vielä, toiminnallisuus??? */}
       <> </>
-      
-    
+
+
 
     </>
   )
