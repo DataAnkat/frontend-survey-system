@@ -28,6 +28,7 @@ function Answers() {
 
   }, [id]);
 
+  // tämän pitää palauttaa useampi vastaus ja sitten heittää hienoon mutoon
   const displayAnswer = (_id: number) => {
     return answers?.find(answer => answer.id === _id)?.answer ?? "";
   }
