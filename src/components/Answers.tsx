@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import type { SurveyData, QuestionData, AnswerData } from "../types";
-import { getQuestionsById, getSurveyById, getAnswerById } from "../surveyapi";
+import { getQuestionsById, getSurveyById, getAnswerById, getAnswers } from "../surveyapi";
 import { TextField } from "@mui/material";
 import '../Survey.css';
 
@@ -17,11 +17,20 @@ function Answers() {
     if (!id) return;
     getSurveyById(id)
       .then(data => setSurvey(data))
-      .catch(error => console.error(error));
+      .catch(error => console.error(error))
     getQuestionsById(id)
       .then(data => setQuestions(data))
       .catch(error => console.error(error))
+    getAnswers()
+      .then(data => setAnswers(data))
+      .catch(error => console.error(error)
+      )
+
   }, [id]);
+
+  const displayAnswer = (_id: number) => {
+    return answers?.find(answer => answer.id === _id)?.answer ?? "";
+  }
 
 // defaultValue="vastaus" -> tämä laittaa valmiin tekstin tekstikenttään
 
@@ -37,7 +46,7 @@ function Answers() {
               multiline
               id="outlined-multiline-flexible"
               className="vastauslaatikko"
-              defaultValue={getAnswerById(i)}
+              defaultValue={displayAnswer(q.id)}
               disabled
                /></li>)}
         </ol>
