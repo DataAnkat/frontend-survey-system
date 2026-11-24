@@ -25,3 +25,11 @@ export function getQuestionsById(id: number | string) {
         });
 
 }
+
+export function getAnswerById(id: number | string) {
+    return fetch(`${import.meta.env.VITE_API_URL}/api/answer/${id}`)
+        .then(response => {
+            if (!response.ok) throw new Error("Error when fetching survey");
+            return response.json();
+        });
+    }

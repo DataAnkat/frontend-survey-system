@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import type { SurveyData, QuestionData } from "../types";
-import { getQuestionsById, getSurveyById } from "../surveyapi";
+import type { SurveyData, QuestionData, AnswerData } from "../types";
+import { getQuestionsById, getSurveyById, getAnswerById } from "../surveyapi";
 import { TextField } from "@mui/material";
 import '../Survey.css';
 
@@ -11,6 +11,7 @@ function Survey() {
   const navigate = useNavigate();
   const [survey, setSurvey] = useState<SurveyData | null>(null);
   const [questions, setQuestions] = useState<QuestionData[] | null>(null);
+  const [answers, setAnswers] = useState<AnswerData[]>([]);
 
   useEffect(() => {
     if (!id) return;
@@ -20,7 +21,16 @@ function Survey() {
     getQuestionsById(id)
       .then(data => setQuestions(data))
       .catch(error => console.error(error))
+
   }, [id]);
+
+  const displayAnswer = (id: number) => {
+    getAnswerById(id)
+      .then(data => setAnswers([data, ...answers]))
+      .catch(error => console.error(error))
+  }
+
+// defaultValue="vastaus" -> tämä laittaa valmiin tekstin tekstikenttään
 
   return (
     <>
@@ -33,7 +43,10 @@ function Survey() {
             <TextField
               multiline
               id="outlined-multiline-flexible"
-              className="vastauslaatikko" /></li>)}
+              className="vastauslaatikko"
+              defaultValue=""
+              disabled
+               /></li>)}
         </ol>
       </div>
 
