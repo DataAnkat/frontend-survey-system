@@ -2,5 +2,10 @@ export type SurveyData = {
     id: number;
     name: string;
     description: string;
-    questions: string[];
+}
+
+export type QuestionData = {
+    question: string;
+    type: string;
+    id: number;
 }
