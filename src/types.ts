@@ -12,7 +12,14 @@ export type QuestionData = {
 }
 
 export type AnswerData = {
-    answer: string;
-    type: string;
-    id: number;
+  answer: string;
+  type: string | null;
+  id: number;
+  question: QuestionData & { survey: SurveyData };
+}
+
+// Lähetettävä vastaus
+export type NewAnswer = {
+  answer: string;
+  question: { id: number };
 }

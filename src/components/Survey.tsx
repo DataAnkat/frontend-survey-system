@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import type { SurveyData, QuestionData, AnswerData } from "../types";
-import { getQuestionsById, getSurveyById, getAnswerById, getAnswers } from "../surveyapi";
+import type { SurveyData, QuestionData, NewAnswer } from "../types";
+import { getQuestionsById, getSurveyById, saveAnswers } from "../surveyapi";
 import { TextField } from "@mui/material";
 import '../Survey.css';
 
@@ -11,19 +11,42 @@ function Survey() {
   const navigate = useNavigate();
   const [survey, setSurvey] = useState<SurveyData | null>(null);
   const [questions, setQuestions] = useState<QuestionData[] | null>(null);
+  // vastaukset kysymyksen id:n mukaan: { [questionId]: "vastaus" }
+  const [answers, setAnswers] = useState<Record<number, string>>({});
 
   useEffect(() => {
     if (!id) return;
     getSurveyById(id)
-      .then(data => setSurvey(data))
+      .then(surveyData => setSurvey(surveyData))
       .catch(error => console.error(error))
     getQuestionsById(id)
-      .then(data => setQuestions(data))
+      .then(questionList => setQuestions(questionList))
       .catch(error => console.error(error))
 
   }, [id]);
 
-// defaultValue="vastaus" -> tämä laittaa valmiin tekstin tekstikenttään
+  // 
+  const handleAnswerChange = (questionId: number, newText: string) => {
+    setAnswers(previousAnswers => ({ ...previousAnswers, [questionId]: newText }));
+  };
+
+  const saveData = () => {
+    const answersToSave: NewAnswer[] = Object.entries(answers)
+      .filter(([, answerText]) => answerText.trim() !== "")
+      .map(([questionId, answerText]) => ({
+        answer: answerText,
+        question: { id: Number(questionId) },
+      }));
+
+    if (answersToSave.length === 0) return;
+
+    saveAnswers(answersToSave)
+      .then(() => {
+        setAnswers({});
+        navigate("/");
+      })
+      .catch(error => console.error(error));
+  };
 
   return (
     <>
@@ -32,24 +55,26 @@ function Survey() {
         <h1>{survey?.name}</h1>
         <p>{survey?.description}</p>
         <ol className="Survey">
-          {questions?.map((q, i) => <li key={i}>{q.question}<br />
-            <TextField
-              multiline
-              id="outlined-multiline-flexible"
-              className="vastauslaatikko"
-               /></li>)}
+          {questions?.map(question => (
+            <li key={question.id}>
+              {question.question}
+              <br />
+              <TextField
+                multiline
+                className="vastauslaatikko"
+                value={answers[question.id] ?? ""}
+                onChange={event => handleAnswerChange(question.id, event.target.value)}
+              />
+            </li>
+          ))}
         </ol>
       </div>
 
       <div>
         <button onClick={() => navigate("/")}>Takaisin</button>
 
-        <button onClick={() => SubmitEvent}>Tallenna</button>
+        <button onClick={saveData}>Tallenna</button>
       </div>
-      {/* Ei toimi vielä, toiminnallisuus??? */}
-      <> </>
-
-
 
     </>
   )

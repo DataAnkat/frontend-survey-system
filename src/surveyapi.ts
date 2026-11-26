@@ -1,3 +1,5 @@
+import type { NewAnswer } from "./types";
+
 export function getSurveys() {
     return fetch(import.meta.env.VITE_API_URL + '/api/surveys') 
         .then(response => {
@@ -41,3 +43,16 @@ export function getAnswers() {
             return response.json();
         });
     }
+
+
+export function saveAnswers(answers: NewAnswer[]) {
+    return fetch(`${import.meta.env.VITE_API_URL}/api/answers/save`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(answers),
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("Error when saving answers");
+            return response.json();
+        });
+}

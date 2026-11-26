@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import type { SurveyData, QuestionData, AnswerData } from "../types";
 import { getQuestionsById, getSurveyById, getAnswerById, getAnswers } from "../surveyapi";
-import { TextField } from "@mui/material";
 import '../Survey.css';
 
 
@@ -29,8 +28,8 @@ function Answers() {
   }, [id]);
 
   // tämän pitää palauttaa useampi vastaus ja sitten heittää hienoon mutoon
-  const displayAnswer = (_id: number) => {
-    return answers?.find(answer => answer.id === _id)?.answer ?? "";
+  const displayAnswers = (questionId: number) => {
+    return answers?.filter(answer => answer.question?.id === questionId) ?? [];
   }
 
 // defaultValue="vastaus" -> tämä laittaa valmiin tekstin tekstikenttään
@@ -42,21 +41,21 @@ function Answers() {
         <h1>{survey?.name}</h1>
         <p>{survey?.description}</p>
         <ol className="Survey">
-          {questions?.map((q, i) => <li key={i}>{q.question}<br />
-            <TextField
-              multiline
-              id="outlined-multiline-flexible"
-              className="vastauslaatikko"
-              defaultValue={displayAnswer(q.id)}
-              disabled
-               /></li>)}
+          {questions?.map(question => (
+            <li key={question.id}>
+                {question.question}
+                <ul>
+                  {displayAnswers(question.id).map(ans => (
+                    <li key={ans.id}>{ans.answer}</li>
+                  ))}
+                </ul>
+            </li>
+            ))}
         </ol>
       </div>
 
       <div>
         <button onClick={() => navigate("/")}>Takaisin</button>
-
-        <button onClick={() => SubmitEvent}>Tallenna</button>
       </div>
       {/* Ei toimi vielä, toiminnallisuus??? */}
       <> </>
