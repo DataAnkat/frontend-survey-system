@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import type { SurveyData, QuestionData, AnswerData } from "../types";
-import { getQuestionsById, getSurveyById, getAnswerById, getAnswers } from "../surveyapi";
+import { getQuestionsById, getSurveyById, getAnswers } from "../surveyapi";
 import '../Survey.css';
 
 
