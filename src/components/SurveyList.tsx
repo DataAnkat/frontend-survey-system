@@ -16,10 +16,17 @@ function SurveyList () {
 
     const columns: GridColDef[] = [
         {
-            field: 'name', headerName: 'Name', flex: 1, 
+            field: 'name', headerName: 'Name', flex: 1,
             renderCell: (params) =>
             <>
                 <Button onClick={() => navigate(`/surveys/${params.row.id}`)}>{'Kysely: ' + params.row.name}</Button>
+                {/* <Button onClick={() => navigate(`/surveys/${params.row.id}/answers`)}>Vastaukset</Button> */}
+            </>
+        },
+        {
+            field: 'name2', headerName: 'Name2', flex: 1,
+            renderCell: (params) =>
+            <>
                 <Button onClick={() => navigate(`/surveys/${params.row.id}/answers`)}>Vastaukset</Button>
             </>
         }
